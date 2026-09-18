@@ -42,3 +42,85 @@ some practicals start
 
 Fashion-MNIST dataset classification
 
+- Softmax Regression Implementation from Scratch
+
+below two are new things, rest remains more or less similar.
+
+def softmax(X):
+X_exp = torch.exp(X)
+partition = X_exp.sum(1, keepdims=True)
+return X_exp / partition # The broadcasting mechanism is applied here
+
+def cross_entropy(y_hat, y):
+return-torch.log(y_hat[list(range(len(y_hat))), y]).mean()
+cross_entropy(y_hat, y)
+
+by combining things we can create classifier for Fashion-MNIST image dataset.
+- we flatten input data from 28 x 28 to 784 x 1
+- just like linear regression we don't have any hidden layers yet. The new additions however are softmax function to get probability distribution out of predicted numbers and we have cross-entropy loss calculation instead of MSE.
+- training and back propagation steps remain same.
+
+- Softmax concise implementation
+
+nn.sequential - we can define layers of process while defining neural network
+
+softmax revisited (interesting one)
+LogSumExp
+
+The fundamental knowledge says to
+1. get logits
+2. find softmax (use of exponential function)
+3. put sofmax value of real label into log (use of log function; cross entropy)
+
+use of eponential function is problematic in computers; it can underflow or overflow.
+
+Better approach?
+use max(all logit values) - o(J) inside exponential function. mathematically response doesn't change due to rule e**(a-b) = e**a / e**b.
+
+this will save us from overflow. underflow is still a risk
+
+what then?
+
+putting softmax function inside log with use of rule explained above will give LogSumExp formula.
+it is a simpler form and safe.
+
+Pytorch internally uses this method.
+
+
+- Generalization in Classification
+
+summary part re-emphasizes importance of generalization and adds another point.
+When we have a complex model (many parameters) with relatively small amount of test data, our initial instinct says it will overfit because model will memorize all train data. However, it is not like that. Although theory says that way, in practice it is au contraire good at generalizing.
+
+So, the point I understood right now is
+there are some statistical methods to find generalization beforehand, but it gives pessimistic insights. For example, you will need too many train data.
+However, when we do actual training, more often we don't need that many training data.
+So, I suppose the chapter will further talk about the industry principles and all.
+
+- 4.6.1 The Test Set
+
+This section addresses ways to predetermine number of test data. Reason? to be confident and aware about our error on any new data that may come in future.
+Note that we are not talking about training data. training is already done and we are talking about testing and measuring errors.
+
+First way is with Central Limit Theorem.
+
+It is based on this logic
+uncertainty increases proportional to sigma / underroot n ; where sigma is standard deviation and n is number of data.
+
+uncertainty will be percentage of allowed variance (let's say 0.01 aka 1%)
+standard deviation will be 0.5 (comes from bernoulli's rule sigma = p(1-p) and p in worst case of uncertainty is 0.5)
+
+if given above 2 values, n will come out as 2500.
+It means if around 2500 random set are ran through classifier and recorded deviation from mean error and let's say we put them on a distribution graph, ~68% (1 standard deviation) of cases will obey our 1% variance condition.
+
+If we want to make it happening for 95% of the cases (2 standard deviation), same formula will give n as 10000.
+
+One important relationship out of this is, if we want uncertainty to reduce by half, our dataset size should increase 4 times.
+
+There is another way to take this estimate.
+It is using Hoeffding formula. It is a formula that takes bounds of allowed variance (1%) and intended distribution spread to be covered (95%) upfront and gives upper bound of n with surety.
+
+In this case it would give 15000. (It gave 10000 for the same requirement)
+
+The main difference is that central limit theorem assumes that as n increases, the cumulative variance from mean follows a normal distribution.
+The Hoeffding formula uses math to directy calculate the value of n without assumption.

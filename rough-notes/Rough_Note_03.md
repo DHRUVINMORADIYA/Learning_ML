@@ -124,3 +124,79 @@ In this case it would give 15000. (It gave 10000 for the same requirement)
 
 The main difference is that central limit theorem assumes that as n increases, the cumulative variance from mean follows a normal distribution.
 The Hoeffding formula uses math to directy calculate the value of n without assumption.
+
+4.6.2 Test Set Reuse
+It talks about selection of test dataset and how human bias can give us wrong confidence.
+
+Problem 1: If we use same dataset for multiple candidate models, the chance of one model becoming our favorite and another our least favorite becomes high - even when they are not much different in general. Just that this perticular data suited them or unsuited them. To our eyes it may seem logical but it is not. This is the multiple hypothesis testing / aflse discovery problem.
+
+Problem 2: If we do test on a single model, let's say we didn't like the error rate and then moved to another model who operated better on same test set, we used test set as a feedback. which is again not right. We are being biased towards that particular test set. And we are using that test set to influence our model selection which is not right. This is adaptive overfitting problem.
+
+Validation set is available for doing this trial-errors-comparisons but test set should be taken as sacred. touch only at end.
+
+4.6.3 Statistical Learning Theory
+
+this was an intro to this field of maths -statistical learning theory. 
+The fact that we can get some concrete conclusion about relationship between model complexity, number of training data and generalization gap purely based on maths is interesting.
+
+concept intro: VC dimension.
+VC dimension tells us maximum number of data points a line can divide on euclidian graph in all possible permutations that data points might take both with labels and positions.
+For example on a 2d graph, a line can safely separate 3 points with whichever positions they take or binary labels they hold. If the 4th point enters, we can still divide in some cases but not in all cases. so VC dimension for 2d is 3. It is basically 1 + current dimensions.
+
+In ML term it comes into picture when we start taking interest in how much flexible or rigid our model is. For example, we tune number of dimensions as number of training data - 1. We can essentially overfit 100% and once we start reducing number of dimensions or increasing number of training dataset, we start increasing generalization.
+
+This relation is nicely explained in below formula.
+It gives certainly that there is some percentage of guarranty that generalization error (difference between emperical error and real world data error) will be limited to some percent.
+
+![alt text](image.png)
+
+
+4.7 Environment and Distribution Shift
+
+A scenario where output of model affects what inputs are received next to classify and how it can be dangerous cycle.
+
+let's say we did all the good things while training and our model has become great at discovering patterns and classifying things. But what if distribution in real world shift? What if we went to some mysterious world where dogs look like cat? Our model is not wrong but the distribution is shifted. The section further talks about this
+
+1. covariate shift - relationships remain same. The type of data we receive change.
+
+p(x, y) = p(x) x p(y | x).
+
+We are saying p(y | x) doesn't change. p(x) change. probability of features changes.
+
+2. label shift - the type of data stays same but the number of times when we encounter them changes.
+
+p(x, y) = p(y) x p(x | y)
+
+p(x | y) remains same. p(y) changes. means when we trained let's say we were getting cancer as label 10% of time but the production data comes with cancer fewer times or more times. Probability of labels changes.
+
+3. concept shift - p(y | x) changes here. 
+
+Possible when geography or times change.
+example, a model which classfiies if something is  fashionable. It changes over time so model will not be relevant.
+
+
+------------
+Covariate shift correction
+
+On available training data, loss calculation looks like this
+![alt text](image-1.png)
+
+And on all real-world data, loss calculation looks this this (hypothetical); weightage system changes here - we take loss value with proportion to chance of seeing them in real life in general; integral seems to be for infinite amount of data.
+![alt text](image-2.png)
+
+Next part introduces beta(i). It says how underrepresented or overrepresented an input is when compared population dataset againt training dataset.
+And we use that to give weights in our loss calculation. If an example likely to be encountered more times in real-world, we punish the weights a little more. and vice versa.
+![alt text](image-4.png)
+
+How to get beta(i) value is the next question
+For that, (it sounds strange and new but) we have to create another simple binary classifier which will classify if a given example is from training data or population data.
+
+![alt text](image-5.png)
+
+Using sigmoid and doing some math will give exp(h(x(i))) as value of beta(i).
+
+h(x) = wx + t; h(x) is basically raw output of our binary classifier.
+
+so what I'm understanding from this is - in p(x,y) = p(x)p(y|x) when p(y|x) is fixed, we can correct covariate shift only by collecting more real-world representative examples (no need of labels); train a second classifier and with that we can better train our primary model.
+
+important catch: if completely new example comes in target dataset, this technic will not work and break something. reason being beta(i) = prod(x)/test(x). if probability of having example in test data is zero or near zero, beta will become too big or even infinity. We don't want that.

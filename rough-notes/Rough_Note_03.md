@@ -200,3 +200,34 @@ h(x) = wx + t; h(x) is basically raw output of our binary classifier.
 so what I'm understanding from this is - in p(x,y) = p(x)p(y|x) when p(y|x) is fixed, we can correct covariate shift only by collecting more real-world representative examples (no need of labels); train a second classifier and with that we can better train our primary model.
 
 important catch: if completely new example comes in target dataset, this technic will not work and break something. reason being beta(i) = prod(x)/test(x). if probability of having example in test data is zero or near zero, beta will become too big or even infinity. We don't want that.
+
+Label Shift Correction
+Let's say we have no clue about what proportions of labels will look like in real-world (p(y) is unknown and suspicious). So we can use this steps:
+1. let's say in training we have 500-500 cats/dogs images.
+2. we run it on random real-world images and see that model gives 300 cats / 700 dogs.
+    - note that labels are unknown to us, we are using model to get labels
+    - we don't really believe if this prediction distribution is correct so we can nudge it with ground truth (which will come from confusion matrix).
+3. On 1000 labelled validation data, we can run our classifier and get the accuracy of model.
+4. we apply this accuracy rate over production data predictions.
+5. Now 300 cats / 700 dogs will be nudge towards true distribution counts. For example, let's say model over or underestimated and after the nudge from confusion matrix, it is 350 cats / 650 dogs. This will be more reliable estimate of real-world labels.
+6. we can then get weights by getting population distribution count of cats / training distribution count of cats. ( P(y)/q(y) ) which we can later use in loss function.
+
+Concept Shift Correction
+- There is no standard principled way to manage this like we have for the other two.
+- We just train on newly updated data on top of existing weights. That's all.
+- Examples, old tech products becoming less popular when new products hit market; news stories gradually replaced by new news stories.
+
+
+4.7.4 A Taxonomy of Learning Problems
+This section gives some theory on what a typical trained model will expect in real world and how we might have to rework on it to keep it relevant.
+1. Batch Learning - train and deploy, we don't have to come back to it. simple cases. (automatic door example that allows only cats)
+2. Online Learning - The labels are not at disposal at beginning. We wait, gather output, compute loss and then have to retrain. (stock price predictor example)
+3. Bandits - Online learning but with only a finite set of actions (arms) instead of a continuously parametrized model. Simpler, so stronger optimality guarantees are provable. It is just a special case, not a separate setting.
+4. Control - The environment has memory; its response depends on what we did before, but it is not adversarial. (coffee boiler is already warm from the last heating; a user won't read the same news article twice). PID controllers are the standard tool. (Not gone deep into PID)
+5. Reinforcement Learning - Environment has memory AND its own agenda - it may cooperate or compete. (chess, other drivers reacting to an autonomous car)
+
+"Considering the Environment - The key variable across all of the above is whether the environment is stationary or adapts to us. A strategy that works on a fixed environment can fail on an adaptive one (an arbitrage opportunity disappears once it is exploited). How fast and how suddenly things change decides the algorithm: slow drift -> force estimates to change slowly; rare sudden jumps -> allow for them explicitly. This is concept shift."
+
+4.7.5 Fairness, Accountability, and Transparency in Machine
+Learning
+- talks about concerns that may raise due to distribution shifts. Model might become a genius but what if training data were limited and production has lot of new patterns. Also it talks about runaway feedback loops. Predictions make real life decisions and those decision in turn affects future distributions. 

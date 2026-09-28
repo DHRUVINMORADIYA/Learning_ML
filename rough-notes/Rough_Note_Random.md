@@ -1,3 +1,9 @@
+---
+title: Rough Note Random
+parent: Rough Notes
+nav_order: 4
+---
+
 Note for writing down things encountered from outside of d2l book.
 
 YT channels

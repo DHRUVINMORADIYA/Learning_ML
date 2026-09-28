@@ -14,6 +14,9 @@ has_children: true
 2. **[01 · Linear Neural Network for Regression](01-linear-neural-network-for-regression/Notes.md)**:
    the first model end to end, built at three levels of abstraction; generalization
    and weight decay.
+3. **[02 · Linear Neural Network for Classification](02-linear-neural-network-for-classification/Notes.md)**:
+   the same linear model predicting a class instead of a number. Softmax,
+   cross-entropy, LogSumExp; test set sizing, VC dimension, distribution shift.
 
 ## Concepts
 
@@ -35,7 +38,8 @@ most hands-off. Each step hands one more responsibility to a library.
 4. **High level**: a framework (Keras, Lightning, fastai) runs everything,
    including the loop. Only data and parameters are configured.
 
-Cited by: [01 · Linear Neural Network for Regression](01-linear-neural-network-for-regression/Notes.md)
+Cited by: [01 · Linear Neural Network for Regression](01-linear-neural-network-for-regression/Notes.md),
+[02 · Linear Neural Network for Classification](02-linear-neural-network-for-classification/Notes.md)
 
 ### Four components of a learning system
 

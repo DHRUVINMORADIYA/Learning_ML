@@ -26,3 +26,8 @@ StatQuest
     - This one feels strange as the usecase of this has not been encountered yet. But it says at many places (stable diffusion models, Deepseek, LoRA, etc) - they all do this where they compress data while not loosing the features to accomodate with GPU capacities and after the processing done they project it back.
     - It feels counter-inuitive but he showed that sometimes not all data are required. We can compress while not loosing features, we do processing at bottle-neck and then expand it back to real form.
     - I have yet to see this in action.
+
+    5. Expressivity
+    - This is about increasing of dimension for the same amount of features. Features count remains same while number of dimensions increases, result? Model starts picking up more patterns. here it feels a bit mysterious and magic like. Only because more than 3 dimensions feel hard to visualize.
+    - Somewhere this relates to VC dimension topic. When it is hard to draw a dividing line in n-d space, project it on (n+1)d space. We should be able to divide now.
+    - Video mentioned feed forward neural network in LLM where this mental model is applied. yet to see that in action. 

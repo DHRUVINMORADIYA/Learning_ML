@@ -31,3 +31,7 @@ StatQuest
     - This is about increasing of dimension for the same amount of features. Features count remains same while number of dimensions increases, result? Model starts picking up more patterns. here it feels a bit mysterious and magic like. Only because more than 3 dimensions feel hard to visualize.
     - Somewhere this relates to VC dimension topic. When it is hard to draw a dividing line in n-d space, project it on (n+1)d space. We should be able to divide now.
     - Video mentioned feed forward neural network in LLM where this mental model is applied. yet to see that in action. 
+
+    6. Diffusion - reverse the corruption
+    - Introduces to another way of generating things. Up until now we saw predictions. How LLM predicts next word. Diffusion is about another way of generating where content is already there but it is with noise. Models are taught to de-noise it and get to the output.
+    - In image generation it is already there. However it is less widespread in text generation.

@@ -55,3 +55,22 @@ similar to sigmoid but given output distribution lies between -1 and 1.
 nothing much mentioned about good, bad and usecases of tanh.
 
 There are more activation functions out there GELU and more. more later.
+
+5.2 Implementation of Multilayer Perceptrons
+We use python sequential to just say how many layers, width of each layer and pytorch gives us that without worrying about inner architecture.
+
+back prop revision as it came again in book
+
+Derived delta J / delta W2 and same for W1 on paper. here is what I am understanding. correct if it is different. delta L / delta o is important one that will be carried over all the way down. it is basically derivative of loss function with reference to prediction made. for sme it is 2/n (pred i - y). if we happen to use softmax and cross entropy, it is simply ( y hat - y). for the output layer updates, we just multiply it with their corresponding h values. he values are values after activation functions applied on previous layer neurons. as we have multiple weights, they all will receive their own h values. now coming to hidden layer. delta L / delta o(d value) will come here as it is. we first multiply it with w2 value. it will basically shrink the d value a bit. w2 is like a gatekeeper - not letting entire thing go to the end. so same way the same strictness should be applied when it comes to who gets more punishment. we then multiply this with x values. we do transpose. not really clear why. but it then matches shape when we have metrices. here also we are making punishment in proportion to who contributed what. we then multiple it with derivative of activation function. if it is relu, it becomes simple 0 or 1. if it is sigmoid. it becomes h x (1-h).
+
+5.4 Numerical Stability and Initialization
+- This section is about maintaining values of weights and biases and keeping them sane.
+
+1. Vanishing Gradients issue
+- Use of sigmoid comes up with this risk. Although it is considered as a similar thresholding activation function to human brain, it can make gradients zero. Reason? it's values are squished between 1 and 0. now when values go through multiple layers, values keep shrinking and it may cause this issue. ReLU on other hand is better at this as we are allowing entire value to pass through. Only concern with ReLU is dying ReLU situation where if some nerons become zero, it becomes useless. There are although some mitigation methods for that.
+
+2. Exploding gradients issue
+- similar mirror case where values keep growing and causes memory overflow issues.
+
+3. Breaking the symmetry
+- It is important to assign random values to weights and biases at beginning - to make model expressive.

@@ -35,3 +35,5 @@ StatQuest
     6. Diffusion - reverse the corruption
     - Introduces to another way of generating things. Up until now we saw predictions. How LLM predicts next word. Diffusion is about another way of generating where content is already there but it is with noise. Models are taught to de-noise it and get to the output.
     - In image generation it is already there. However it is less widespread in text generation.
+
+    7. Adverserial Networks - Not yet encountered irl. It showed how models can learn to perform tasks when two models setup is done. first is generator and second evaluator. Or say forger and detective and how both can improve.

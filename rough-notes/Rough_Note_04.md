@@ -74,3 +74,30 @@ Derived delta J / delta W2 and same for W1 on paper. here is what I am understan
 
 3. Breaking the symmetry
 - It is important to assign random values to weights and biases at beginning - to make model expressive.
+
+4. mitigation methods for exploding/vanishing gradients
+If we use ML frameworks, this is all handlled by libraries and we don't have to worrry about them.
+For the sake of keeping a note understood it on high level. Might need to dive deeper into it in future if requires.
+
+4.1 Xavier Initialization
+In this method, we stop at each layer and ask - given that I have x number of inputs and y number of outputs in that layer, what variance should I use while getting weights from normal or uniform distribution so that input variance stays roughly same as output variance.
+Combining the same question from front propagation with back propagation gives us xavier formula.
+
+![alt text](image-6.png)
+![alt text](image-7.png)
+![alt text](image-8.png)
+
+Xavier formula is compatible with TanH and Sigmoid.
+
+4.2 He Initialization
+It solve same purpose for when we use ReLU. To compansate for negative (dying) neurons, we increase the variance.
+![alt text](image-9.png)
+
+5.5 Generalization in Deep Learning
+- Some reiteration of same points from previous chapters and some other general talks
+1. Optimization and Generalization are different tasks. Optimization is about fitting the training data. Generalization is about understanding underlying patterns - patters that would be reliable for unknown data as well.
+2. Inductive biases matter - Inductive bias is models preference towards certain configuration of parameters over others. It may come from architecture selection, optimization algorithms, initialization etc. We can imagine models having their own way of achieving things. We may or may not always be able to control it.
+3. Some part of entire training process and the question why do models generalize well are still mysterious at some levels. They are some smart brute force approches that does impressive work, however we can't say we have 100% theoritical proof that they are the best approach.
+
+5.5.2 Inspiration from Nonparametrics
+Some parallels done between neural nets and kernels. Kernels yet to learn. This point will stay open till finished.

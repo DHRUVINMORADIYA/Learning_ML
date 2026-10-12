@@ -100,4 +100,13 @@ It solve same purpose for when we use ReLU. To compansate for negative (dying) n
 3. Some part of entire training process and the question why do models generalize well are still mysterious at some levels. They are some smart brute force approches that does impressive work, however we can't say we have 100% theoritical proof that they are the best approach.
 
 5.5.2 Inspiration from Nonparametrics
+"Functionally, neural networks look like parametric models. But thinking of them as nonparametric models can sometimes be a more reliable source of intuition."
+
 Some parallels done between neural nets and kernels. Kernels yet to learn. This point will stay open till finished.
+
+Spent some time understandingt kernels and SVM (support vector machines). parking it after getting high level idea of them for now as there is much more to it.
+
+5.5.3 Early Stopping
+a techinque to stop early when validation loss reached the bottom and then model starts fitting to noise rather than actual patterns.
+
+5.6 Dropout

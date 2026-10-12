@@ -37,3 +37,11 @@ StatQuest
     - In image generation it is already there. However it is less widespread in text generation.
 
     7. Adverserial Networks - Not yet encountered irl. It showed how models can learn to perform tasks when two models setup is done. first is generator and second evaluator. Or say forger and detective and how both can improve.
+
+    8. Entropy - Explains how concept of entropy imerged from thermodynamics to explain rate of chaos for a group of atoms. (more entropy means more instability.) Later it came in information theory. (entropy is seen in proportion to how surprised I'm with information received. If event with probability 1% takes place -> entropy is high. If a very much expected event happens -> entropy is low.)
+    Later it came into AI/ML. especially as seen in softmax -> cross entropy -> loss calc process in classification models. 
+
+    9. Everything is a distribution - 
+    Distribution came first time in d2l book while creation of synthetic data for model. Here in video it explained how concepts of distribution and normal distribution are much more than few limited areas. Anything that has no fixed answer and it repeats many times, we can see it as a probability distribution. If it repeats thousands of times, we generally get a bell shaped curve. There should exist an area in statistics and probabilities where this is a central part. 
+    Mostly because if there is certainty, we are normally good. we can simply create if else blocks.
+    in ML world when it comes to predicting and classifying things. we don't have simple yes/no answer. I suppose probability distributions should play important role here. It should help getting directions/ getting conclusions where the statements are like 'It has 80% CHANCE of happening'

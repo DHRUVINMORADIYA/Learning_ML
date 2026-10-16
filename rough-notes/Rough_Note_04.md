@@ -110,3 +110,19 @@ Spent some time understandingt kernels and SVM (support vector machines). parkin
 a techinque to stop early when validation loss reached the bottom and then model starts fitting to noise rather than actual patterns.
 
 5.6 Dropout
+- Regularization method where we randomly disable neurons during training. We make the model more robust with this strategy and empirically proven, it generalizes better with this approach. We also reduce co dependency by making neurons independtly confident - making them less dependent on relying few othe neurons.
+- The surviving neuron activation values are bumped up by dividing it with 1-p.
+- if the same input is process thousands of times, we expect the average activation of any given neuron remains same as we are suppressing their activation and when left open, we are bumping their activation up by dividing them with 1-p.
+- scratch and concise implementations are coverd in book - very straighforward.
+
+5.7 Predicting House Prices on Kaggle
+
+5.7.4 Data Preprocessing
+
+Numerical data are rescaled with respect to their distance to mean and standard deviation. It makes sense when we think this example: let's say there are two columns. one has data like 10, 23, 12, 9, etc. Second column has 56000, 30000, 20000, etc. We can't parse them as they are to model. So we use below formula to transform them. at the end we can expect both will get converated into series with mean 0 and standard deviation 1.
+![alt text](image-10.png)
+
+then we fill null values with zero. that means we are placing missing ones at mean.
+
+next, categorical values are converted into one hot encodings by creating separate column for each.
+features = pd.get_dummies(features, dummy_na=True)

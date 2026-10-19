@@ -17,6 +17,11 @@ has_children: true
 3. **[02 · Linear Neural Network for Classification](02-linear-neural-network-for-classification/Notes.md)**:
    the same linear model predicting a class instead of a number. Softmax,
    cross-entropy, LogSumExp; test set sizing, VC dimension, distribution shift.
+4. **[03 · Multilayer Perceptrons](03-multilayer-perceptrons/Notes.md)**:
+   hidden layers and why activation functions are needed (ReLU, sigmoid, tanh);
+   backprop through layers; vanishing / exploding gradients and initialization
+   (Xavier, He); early stopping, dropout, k-fold cross-validation on Kaggle house
+   prices.
 
 ## Concepts
 
@@ -39,7 +44,8 @@ most hands-off. Each step hands one more responsibility to a library.
    including the loop. Only data and parameters are configured.
 
 Cited by: [01 · Linear Neural Network for Regression](01-linear-neural-network-for-regression/Notes.md),
-[02 · Linear Neural Network for Classification](02-linear-neural-network-for-classification/Notes.md)
+[02 · Linear Neural Network for Classification](02-linear-neural-network-for-classification/Notes.md),
+[03 · Multilayer Perceptrons](03-multilayer-perceptrons/Notes.md)
 
 ### Four components of a learning system
 
@@ -64,3 +70,24 @@ How many examples go into one parameter update, a precision vs cost trade-off.
   default.
 
 Cited by: [00 · Basics](00-basics/Notes.md)
+
+### Generalization
+
+Doing well on data the model has never seen, not just fitting the training data.
+It runs through every chapter so far:
+
+- **Restraining the model**: weight decay
+  ([01](01-linear-neural-network-for-regression/Notes.md)), dropout
+  ([03](03-multilayer-perceptrons/Notes.md#dropout)).
+- **Knowing when to stop**: early stopping
+  ([03](03-multilayer-perceptrons/Notes.md#early-stopping)).
+- **Measuring it honestly**: test set size and reuse
+  ([02](02-linear-neural-network-for-classification/Notes.md#generalization-in-classification)),
+  k-fold cross-validation
+  ([03](03-multilayer-perceptrons/Notes.md#k-fold-cross-validation-and-model-selection)).
+- **When the world itself changes**: distribution shift
+  ([02](02-linear-neural-network-for-classification/Notes.md#environment-and-distribution-shift)).
+
+Cited by: [01 · Linear Neural Network for Regression](01-linear-neural-network-for-regression/Notes.md),
+[02 · Linear Neural Network for Classification](02-linear-neural-network-for-classification/Notes.md),
+[03 · Multilayer Perceptrons](03-multilayer-perceptrons/Notes.md)

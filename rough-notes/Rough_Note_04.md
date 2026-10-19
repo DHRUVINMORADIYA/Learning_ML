@@ -122,7 +122,38 @@ a techinque to stop early when validation loss reached the bottom and then model
 Numerical data are rescaled with respect to their distance to mean and standard deviation. It makes sense when we think this example: let's say there are two columns. one has data like 10, 23, 12, 9, etc. Second column has 56000, 30000, 20000, etc. We can't parse them as they are to model. So we use below formula to transform them. at the end we can expect both will get converated into series with mean 0 and standard deviation 1.
 ![alt text](image-10.png)
 
+above step feels important and worth keeping. concept wise feels rich and might come back somewhere else too.
+
 then we fill null values with zero. that means we are placing missing ones at mean.
 
 next, categorical values are converted into one hot encodings by creating separate column for each.
 features = pd.get_dummies(features, dummy_na=True)
+
+5.7.5 Error Measure
+- The common instict when it comes to defining loss function is take (y - y hat)**2.
+-  However there are issues with that.
+    issue 1: house price difference of 100k is not same for a 200k house and 5M house. so taking proportion is important. We can take proportional measure (y - y hat) / y. Even better - use logs. because log a - log b = log(a/b). so simply below equation would be enough.
+![alt text](image-11.png)
+
+    issue 2: predicted price can become negative.
+
+- To solve the issue two we can go one step ahead and transform labels into log (labels) upfront. teach model to predict log values and we use that directly in to loss function.
+
+
+5.7.6 𝐾-Fold Cross-Validation
+5.7.7 Model Selection
+5.7.8 Submitting Predictions on Kaggle
+
+K-fold cross-validation technique is used to decide on hyper parameters of model. For example if k = 5. We take one configuration of hyper parameters, run a loop 5 times and train a fresh new model with 4 folds and using last fold as validation set. collect losses and take average.
+repeat this again with a different hyperparameters configuration, gather average loss and compare.
+Beware that trying too many different configs could bring the model selection bias where we just get lucky with some config and can not find the one that generalizes on production data.
+
+Why not one single model that we can train on 80% of total available labeled data?
+Because there is a chance that some model gives low validation error just by chance. What if model learned some quirks and patters that luckily applies to selected 20% validation dataset? Concept learned about distribution shift connects here.
+
+In cross validation we keep rotating validation dataset and take average from multiple models - making the error more robust and less prone to distribution shift when real test data set comes.
+
+Next step was to prepare predictions and submitting on kaggle.
+
+Once decided on hyperparameters, we can choose to take that config and train freshly on all training data.
+However d2l book used the same 5 models to predict the house prices for test data. It can work but doesn't seem like a standard industry practice.

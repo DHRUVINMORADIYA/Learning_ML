@@ -153,7 +153,7 @@ Because there is a chance that some model gives low validation error just by cha
 
 In cross validation we keep rotating validation dataset and take average from multiple models - making the error more robust and less prone to distribution shift when real test data set comes.
 
-Next step was to prepare predictions and submitting on kaggle.
+Next step was to prepare predictions and submitting on kaggle. (https://github.com/DHRUVINMORADIYA/Kaggle-House-Price-Prediction)
 
 Once decided on hyperparameters, we can choose to take that config and train freshly on all training data.
 However d2l book used the same 5 models to predict the house prices for test data. It can work but doesn't seem like a standard industry practice.

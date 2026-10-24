@@ -325,13 +325,13 @@ In cross-validation we keep rotating the validation set and take the average fro
 
 ### Final model and submitting on Kaggle
 
-The last step was preparing predictions and submitting them on Kaggle.
+The last step was preparing predictions and submitting them on Kaggle ([project repo](https://github.com/DHRUVINMORADIYA/Kaggle-House-Price-Prediction){:target="_blank"}).
 
 Once the hyperparameters are decided, we can take that config and train freshly on all the training data. However, the D2L book used the same 5 models to predict the house prices for the test data (averaging their predictions). It can work but doesn't seem like a standard industry practice.
 
 ## Practice files
 
-### [Kaggle_House_Prices.py](https://github.com/DHRUVINMORADIYA/Learning_ML_01_ANN/blob/main/permanent-notes/03-multilayer-perceptrons/Kaggle%20House%20Price%20Prediction/Kaggle_House_Prices.py){:target="_blank"}
+### [Kaggle_House_Prices.py](https://github.com/DHRUVINMORADIYA/Kaggle-House-Price-Prediction/blob/main/Kaggle_House_Prices.py){:target="_blank"}
 
 Level 3 on the [levels of abstraction](../Index.md#levels-of-abstraction) ladder: `nn` + `optim`, training loop written by me. A boilerplate baseline for the [Kaggle contest](https://www.kaggle.com/c/house-prices-advanced-regression-techniques){:target="_blank"}, to play around with later.
 

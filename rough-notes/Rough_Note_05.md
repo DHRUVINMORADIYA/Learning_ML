@@ -54,3 +54,12 @@ print(net[2].weight.data[0] == net[4].weight.data[0])
 6.3 Parameter Initialization
 - Pytorch methods for parameters initialization - custom, inbuilt and hybrid
 
+6.4 Lazy Initialization
+- In pytorch modules weights are initilized when first inference is run, so we don't have to define input parameters count for each layer in general. It is calculated at runtime.
+
+6.5 Custom Layers
+- shows method to create custom layer with or without parameters. straightforward.
+
+6.6 File I/O
+- It is possible to store and load tensors to/from disk.
+- It is possible to store and load model parameters to/from disk. architecture of model is still required to be recreated or cloned in code. Only parameters are stored and restored.

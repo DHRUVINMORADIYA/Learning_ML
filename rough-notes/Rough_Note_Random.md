@@ -62,7 +62,9 @@ Attempt to understand GPT-2 e2e -> https://www.llm-visualized.com/
 - Sinusoidal position: this was used in the paper attention is all you need where below formulas were used to get sin and cos values. Imagine multiple clocks. first one running fast - taking big jumps. for this clock we will reach to point zero very soon. if that's the case, add another clock which runs a bit slower and keep repeating this till we cover all dimension size of position embedding matrix. this newly created vector is then simply added to token embedding matrix.
 ![alt text](image-12.png)
 ![alt text](image-13.png)
-
+- Next and the most used approach is RoPE (Rotary positional embeddings). here we are not creating a new set of values like the previous two methods but we transform the pairs from Q and K vectors of each token in each attention head into new vectors based on their position and the same clock idea from sinusoidal embedding method. As we are transforming a 2-d vector(each pair) we need 4 values for the operation which comes from below formula
+![alt text](image-14.png)
+- where alpha is same as value used in brackets in image-12.
 
 3. added values are sent into layer normalization step. 3 processes occure there
    - normalization using mean and variance.

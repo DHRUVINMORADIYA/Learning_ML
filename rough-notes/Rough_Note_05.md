@@ -63,3 +63,23 @@ print(net[2].weight.data[0] == net[4].weight.data[0])
 6.6 File I/O
 - It is possible to store and load tensors to/from disk.
 - It is possible to store and load model parameters to/from disk. architecture of model is still required to be recreated or cloned in code. Only parameters are stored and restored.
+
+6.7 GPUs
+CPU is a small team of highly intelligent workers (cores)
+GPU is a huge army of workers who are experts at some specific tasks, therefore they work best for video games and neural networks = both matrices heavy.
+
+While defining tensors and nets in pytorch we can define where we want to store them - in CPU or in GPU.
+We can move the stored tensor/net to/from GPUs too.
+
+device = torch.device("cuda")
+net = nn.Linear(10, 5).to(device)
+X = torch.randn(32, 10).to(device)
+Y = net(X)
+
+Rule: all elements should live in same device - tensor, other tensor in used in same process and nets.
+
+CUDA is similar to a library (however it is more than just a library). it connects pytorch to NVIDIA driver that further connects to NVIDIA GPU.
+
+some more info: 
+Transfer between cpu and gpu is slower than computation. There can be issues with parallelization too.
+So ideally store once, process together is better approach than doing back and forth.

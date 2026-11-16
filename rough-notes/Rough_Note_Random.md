@@ -1,7 +1,7 @@
 ---
 title: Rough Note Random
 parent: Rough Notes
-nav_order: 4
+nav_order: 6
 ---
 
 Note for writing down things encountered from outside of d2l book.
@@ -45,3 +45,26 @@ StatQuest
     Distribution came first time in d2l book while creation of synthetic data for model. Here in video it explained how concepts of distribution and normal distribution are much more than few limited areas. Anything that has no fixed answer and it repeats many times, we can see it as a probability distribution. If it repeats thousands of times, we generally get a bell shaped curve. There should exist an area in statistics and probabilities where this is a central part. 
     Mostly because if there is certainty, we are normally good. we can simply create if else blocks.
     in ML world when it comes to predicting and classifying things. we don't have simple yes/no answer. I suppose probability distributions should play important role here. It should help getting directions/ getting conclusions where the statements are like 'It has 80% CHANCE of happening'
+
+
+Attempt to understand GPT-2 e2e -> https://www.llm-visualized.com/
+
+1. Token embedding Matrix
+- Fetches 768 dimensional vector value for each token from already learned Matrix.
+- it is just another learned matrix; we can see it as the first equation in the long chain of equations leading to predictions. So same like others, token embedding matrix will get its gradients via chain rule and during training process the weights will update.
+
+2. Position embedding Matrix
+- learned 768-dimensional vector value for each position of input
+- additing this to token embeddings give position aware embeddings
+- Mathematically not much different from token embedding matrix. Only during training process they start to get their own identities.
+- understand this better - RoPE, etc.
+- keeping learned position embeddings is one aproach that GPT-2 uses, other than that there are multiple aproaches that rely on pure mathematics.
+- Sinusoidal position: this was used in the paper attention is all you need where below formulas were used to get sin and cos values. Imagine multiple clocks. first one running fast - taking big jumps. for this clock we will reach to point zero very soon. if that's the case, add another clock which runs a bit slower and keep repeating this till we cover all dimension size of position embedding matrix. this newly created vector is then simply added to token embedding matrix.
+![alt text](image-12.png)
+![alt text](image-13.png)
+
+
+3. added values are sent into layer normalization step. 3 processes occure there
+   - normalization using mean and variance.
+   - elementwise multiplication by a layer level learned parameter gamma
+   - elementwise addition by another layer level learned parameter beta

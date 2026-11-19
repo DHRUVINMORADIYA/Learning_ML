@@ -12,7 +12,7 @@ Concepts of ML and ANN come into picture when the requirement doesn't have defin
 
 Model is nothing but a set of flexible inter-connected knobs that we can tune in order to deliver the best possible result in any case.
 
-This code is my attempt at understanding a typical training cycle (epoch) in a neural network with below mentioned concepts without going into metrices yet.  [`code/ANN_single_epoch_simulation.py`](https://github.com/DHRUVINMORADIYA/Learning_ML_01_ANN/blob/main/rough-notes/code/ANN_single_epoch_simulation.py){:target="_blank"}.
+This code is my attempt at understanding a typical training cycle (epoch) in a neural network with below mentioned concepts without going into metrices yet.  [`code/ANN_single_training_step_simulation.py`](https://github.com/DHRUVINMORADIYA/Learning_ML_01_ANN/blob/main/rough-notes/code/ANN_single_training_step_simulation.py){:target="_blank"}.
 - Front propagation (weighted sums + biases, sigmoid)
 - Loss calculation (squared error) and 
 - Back propagation (partial derivation, chain rule, gradient descent)  

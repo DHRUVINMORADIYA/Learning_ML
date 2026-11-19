@@ -10,7 +10,7 @@ Builds on [02 · Linear Neural Network for Classification](../02-linear-neural-n
 
 ## Summary
 
-This chapter is basically where I started all this: [ANN_single_epoch_simulation.py](https://github.com/DHRUVINMORADIYA/Learning_ML_01_ANN/blob/main/rough-notes/code/ANN_single_epoch_simulation.py){:target="_blank"} and the MNIST image classification problem.
+This chapter is basically where I started all this: [ANN_single_training_step_simulation.py](https://github.com/DHRUVINMORADIYA/Learning_ML_01_ANN/blob/main/rough-notes/code/ANN_single_training_step_simulation.py){:target="_blank"} and the MNIST image classification problem.
 
 In the last two chapters there was a single step to get the output; every input affected the output directly. MLP (multilayer perceptron) adds hidden layers in between, where every neuron of one layer directly affects every neuron of the next layer.
 
@@ -167,7 +167,7 @@ $$
 
 That sum runs down a column of $\mathbf{W}^{(2)}$, which is a row of $\mathbf{W}^{(2)\top}$. So the transpose is the same connections used in the reverse direction. Same idea for $\mathbf{h}^\top$ and $\mathbf{x}^\top$: weight $W_{ij}$ connects input $j$ to neuron $i$, so its punishment is (punishment of neuron $i$) $\times$ (input $j$), and $\frac{\partial J}{\partial \mathbf{z}}\,\mathbf{x}^\top$ builds that whole grid at once.
 
-This is the same thing I did by hand for a tiny 2-2-1 sigmoid network in [ANN_single_epoch_simulation.py](https://github.com/DHRUVINMORADIYA/Learning_ML_01_ANN/blob/main/rough-notes/code/ANN_single_epoch_simulation.py){:target="_blank"}, where `error_signal_from_output_layer` gets routed back through w5 and w6.
+This is the same thing I did by hand for a tiny 2-2-1 sigmoid network in [ANN_single_training_step_simulation.py](https://github.com/DHRUVINMORADIYA/Learning_ML_01_ANN/blob/main/rough-notes/code/ANN_single_training_step_simulation.py){:target="_blank"}, where `error_signal_from_output_layer` gets routed back through w5 and w6.
 
 ## Numerical stability and initialization
 

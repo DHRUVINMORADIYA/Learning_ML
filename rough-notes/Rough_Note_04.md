@@ -6,7 +6,7 @@ nav_order: 4
 
 Chapter 5: Multilayer Perceptrons
 
-This is basically from where I started this - ANN_single_epoch_simulation.py and MNIST image classfication problems.
+This is basically from where I started this - ANN_single_training_step_simulation.py and MNIST image classfication problems.
 
 In last two chapters there was a single step to derive output. All input points affects directly the output.
 MLP introduces hidden layer where all neurons from previous layer directly affects all neurons in next layer.
